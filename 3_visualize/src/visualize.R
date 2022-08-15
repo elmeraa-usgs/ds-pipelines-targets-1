@@ -1,19 +1,22 @@
 #' Create a plot
-#' 
+#' @ param file_in, specifying file path for input 
+#' @ param file out, specifying file path for output
 #' @export figure_1 png, viz depicts training temp profile (#) by test RMSE (°C) for three model types 
 
 
-visualize <- function(){
+visualize <- function(file_in, file_out, ...){
   
-  # Check for existence of out subfolder
-  dir.exists("3_visualize/out")
+  # Check for existence of out subfolder; returns false if directory already exists and true if it did not but was successfully created 
+  ifelse(!dir.exists(file.path(file_out)), dir.create(file.path(file_out)), FALSE)
   
   # Read in eval data
-  eval_data <- readRDS("2_process/out/eval_data")
+  eval_data <- read_csv(file_in)
   
-  png(file = file.path('3_visualize/out/figure_1.png'), width = 8, height = 10, res = 200, units = 'in')
+  # create plot, dimensions assigned in arguement 
+  png(file = file_out, ...)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
   
+  # set up for plot 
   plot(NA, NA, xlim = c(2, 1000), ylim = c(4.7, 0.75),
        ylab = "Test RMSE (°C)", xlab = "Training temperature profiles (#)", log = 'x', axes = FALSE)
   
@@ -26,6 +29,7 @@ visualize <- function(){
   offsets <- data.frame(pgdl = c(0.15, 0.5, 3, 7, 20, 30)) %>%
     mutate(dl = -pgdl, pb = 0, n_prof = n_profs)
   
+  # plot 
   for (mod in c('pb','dl','pgdl')){
     mod_data <- filter(eval_data, model_type == mod)
     mod_profiles <- unique(mod_data$n_prof)
@@ -56,5 +60,3 @@ visualize <- function(){
   
 }
 
-# run visualization function
-visualize()
