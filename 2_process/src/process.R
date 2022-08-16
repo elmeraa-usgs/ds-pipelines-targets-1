@@ -1,4 +1,6 @@
 #' Prepare the data for plotting
+#' @ param file_in, specifying file path for input 
+#' @ param file out, specifying file path for output
 #' @param col vector, three colors associated with each model type: pb, dl, & pgdl
 #' @param pch vector, three values associated with each model: pb, dl, & pgdl
 #' @export model_summary_results csv, file includes exper_n, exper_id, model_type, rmse, col, pch, and n_proof 
