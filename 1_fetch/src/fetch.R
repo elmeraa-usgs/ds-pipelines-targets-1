@@ -1,4 +1,5 @@
 #' Fetch data function
+#' @ param file out, specifying file path for output
 #' @export model_RMSE csv, file includes exper_n, exper_id, model_type & rmse
 
 fetch <- function(file_out){
