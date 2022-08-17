@@ -7,7 +7,8 @@
 visualize <- function(file_in, file_out, ...){
   
   # Check for existence of out subfolder; returns false if directory already exists and true if it did not but was successfully created 
-  ifelse(!dir.exists(file.path(file_out)), dir.create(file.path(file_out)), FALSE)
+  lapply(file_out, function(x) if(!dir.exists(x)) dir.create(paste(getwd(),"3_visualize", "out",sep = "/"))) 
+  
   
   # Read in eval data
   eval_data <- read_csv(file_in)
