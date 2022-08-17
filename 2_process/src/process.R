@@ -25,4 +25,5 @@ process <- function(file_in, file_out, col, pch){
   
   # export eval data
   write_csv(eval_data, file = file_out)
+  return(file_out)
 }

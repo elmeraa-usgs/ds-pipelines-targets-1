@@ -45,6 +45,6 @@ diagnostics <- function(file_in, file_out){
   # export 
   whisker.render(template_1 %>% str_remove_all('\n') %>% str_replace_all('  ', ' '), render_data ) %>% cat(file = file_out)
   
-  
+  return(file_out)
 }
 
