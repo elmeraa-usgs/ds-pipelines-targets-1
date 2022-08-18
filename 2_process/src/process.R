@@ -8,7 +8,8 @@
 process <- function(file_in, file_out, col, pch){
   
   # Check for existence of out subfolder; returns false if directory already exists and true if it did not but was successfully created 
-  lapply(file_out, function(x) if(!dir.exists(x)) dir.create(paste(getwd(),"2_process", "out",sep = "/"))) 
+  path_only <- stringr::str_extract(file_out, '^[^\\/]*\\/[^\\/]*')
+  if(!dir.exists(path_only)) dir.create(path_only)
   
   # prepare data to visualize
   eval_data <- read_csv(file_in, col_types = 'iccd') %>%

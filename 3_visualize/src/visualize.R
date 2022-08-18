@@ -7,14 +7,15 @@
 visualize <- function(file_in, file_out, ...){
   
   # Check for existence of out subfolder; returns false if directory already exists and true if it did not but was successfully created 
-  lapply(file_out, function(x) if(!dir.exists(x)) dir.create(paste(getwd(),"3_visualize", "out",sep = "/"))) 
+  path_only <- stringr::str_extract(file_out, '^[^\\/]*\\/[^\\/]*')
+  if(!dir.exists(path_only)) dir.create(path_only)
   
   
   # Read in eval data
   eval_data <- read_csv(file_in)
   
   # create plot, dimensions assigned in arguement 
-  png(file = file_out, ...)
+  png(file = paste("3_visualize", "out", "figure_1.png", sep = "/"), ...)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
   
   # set up for plot 
