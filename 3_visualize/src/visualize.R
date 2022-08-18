@@ -15,7 +15,7 @@ visualize <- function(file_in, file_out, ...){
   eval_data <- read_csv(file_in)
   
   # create plot, dimensions assigned in arguement 
-  png(file = paste("3_visualize", "out", "figure_1.png", sep = "/"), ...)
+  png(file = file_out, ...)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
   
   # set up for plot 
