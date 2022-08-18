@@ -7,7 +7,9 @@
 visualize <- function(file_in, file_out, ...){
   
   # Check for existence of out subfolder; returns false if directory already exists and true if it did not but was successfully created 
-  ifelse(!dir.exists(file.path(file_out)), dir.create(file.path(file_out)), FALSE)
+  path_only <- stringr::str_extract(file_out, '^[^\\/]*\\/[^\\/]*')
+  if(!dir.exists(path_only)) dir.create(path_only)
+  
   
   # Read in eval data
   eval_data <- read_csv(file_in)
@@ -56,7 +58,7 @@ visualize <- function(file_in, file_out, ...){
   text(2.3, 1.1, 'Process-Based', pos = 4, cex = 1.1)
   
   dev.off()
-  
+  return(file_out)
   
 }
 
